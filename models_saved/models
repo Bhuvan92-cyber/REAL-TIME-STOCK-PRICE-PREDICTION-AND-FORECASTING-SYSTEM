@@ -1,2 +1,1 @@
-
-delete only this file before the model training.
+delete this file only after the trained models are saved in this folder successfully of both the machine learning and deep learning models.
