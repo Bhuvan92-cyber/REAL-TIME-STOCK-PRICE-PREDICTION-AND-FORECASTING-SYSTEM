@@ -1,0 +1,102 @@
+# ===============================
+# API KEYS (ADD YOUR OWN)
+# ===============================
+
+alpha_vantage_api_key: "YOUR_ALPHA_VANTAGE_API_KEY_HERE"
+news_api_key: "YOUR_NEWS_API_KEY_HERE"
+
+# ===============================
+# SUPPORTED STOCKS (3 Main Stocks)
+# ===============================
+
+supported_stocks:
+  - symbol: "AAPL"
+    name: "Apple Inc."
+    exchange: "NASDAQ"
+    live: true
+    data_source: "yfinance"
+    ticker: "AAPL"
+  
+  - symbol: "TCS"
+    name: "Tata Consultancy Services"
+    exchange: "NSE"
+    live: true
+    data_source: "yfinance"
+    ticker: "TCS.NS"
+  
+  - symbol: "NIFTY50"
+    name: "NIFTY 50 Index"
+    exchange: "NSE"
+    live: true
+    data_source: "yfinance"
+    ticker: "^NSEI"
+
+# ===============================
+# MODEL SETTINGS
+# ===============================
+
+default_stock_symbol: "AAPL"
+prediction_horizon: 1
+lookback_window: 60
+
+models:
+  random_forest:
+    n_estimators: 200
+    max_depth: null
+    random_state: 42
+  
+  cnn_lstm:
+    hidden_size: 64
+    input_channels: 1
+    epochs: 10
+    learning_rate: 0.001
+    batch_size: 32
+
+# ===============================
+# PATHS
+# ===============================
+
+data_paths:
+  raw: "data/raw/"
+  processed: "data/processed/"
+  models: "models_saved/"
+  logs: "logs/"
+
+# ===============================
+# REAL-TIME SETTINGS
+# ===============================
+
+realtime:
+  update_interval_seconds: 30
+  enabled_stocks:
+    - "AAPL"
+    - "TCS"
+    - "NIFTY50"
+
+# ===============================
+# PREPROCESSING SETTINGS
+# ===============================
+
+preprocessing:
+  missing_value_method: "forward_fill"
+  normalization: "minmax"
+  
+# ===============================
+# FEATURE ENGINEERING
+# ===============================
+
+feature_engineering:
+  technical_indicators:
+    - sma_20
+    - ema_20
+    - rsi
+    - macd
+    - bollinger_bands
+  
+  lag_features:
+    - 1
+    - 5
+    - 20
+  
+  volatility_window: 20
+

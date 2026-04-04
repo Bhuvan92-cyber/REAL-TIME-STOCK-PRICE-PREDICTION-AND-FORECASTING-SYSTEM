@@ -1,0 +1,43 @@
+### Run the Complete Workflow
+
+**Step 1: Prepare Data & Train Models (First Time Only)**
+```bash
+# Run the full data pipeline
+
+
+-------------------python scripts/run_pipeline.py
+
+# Train both Random Forest and CNN-LSTM models
+-------------------python scripts/train_model.py
+```
+
+**Step 2: Launch the Dashboard**
+```bash
+-------------------streamlit run dashboard/app.py
+```
+Dashboard opens at: **http://localhost:8501**
+
+**Step 3: (Optional) Start Real-Time Data Ingestion**
+```bash
+# In a new terminal, start live data streaming
+-------------------------------python scripts/realtime_runner.py
+```
+
+
+### Installation & Setup
+
+1. **Clone or navigate to the project directory:**
+   ```bash
+   cd Real-Time-Stock-Market-Analysis-And-Prediction-System
+   ```
+
+2. **Install the project in editable mode:**
+   ```bash
+   pip install -e .
+   ```
+   This installs all dependencies and registers the `modules` package.
+
+3. **Verify installation:**
+   ```bash
+   python -c "import modules; print('✅ Installation successful')"
+   ```
