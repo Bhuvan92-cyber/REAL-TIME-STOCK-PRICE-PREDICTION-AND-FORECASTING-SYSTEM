@@ -1,0 +1,93 @@
+/* ===============================
+   Global App Styling
+   =============================== */
+
+body {
+    background-color: #0e1117;
+    color: #fafafa;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ===============================
+   Sidebar Styling
+   =============================== */
+
+section[data-testid="stSidebar"] {
+    background-color: #161a23;
+}
+
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3 {
+    color: #00c2ff;
+}
+
+/* ===============================
+   Headers & Titles
+   =============================== */
+
+h1, h2, h3 {
+    color: #00c2ff;
+    font-weight: 600;
+}
+
+h4, h5, h6 {
+    color: #e0e0e0;
+}
+
+/* ===============================
+   Metrics Styling
+   =============================== */
+
+div[data-testid="metric-container"] {
+    background-color: #1e222e;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid #00c2ff;
+}
+
+/* ===============================
+   Dataframe Styling
+   =============================== */
+
+div[data-testid="stDataFrame"] {
+    background-color: #1e222e;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* ===============================
+   Buttons
+   =============================== */
+
+button {
+    background-color: #00c2ff !important;
+    color: black !important;
+    border-radius: 8px !important;
+    font-weight: bold !important;
+}
+
+/* ===============================
+   Alerts & Info Boxes
+   =============================== */
+
+div[data-testid="stAlert"] {
+    border-radius: 10px;
+}
+
+/* ===============================
+   Charts
+   =============================== */
+
+canvas {
+    background-color: #1e222e !important;
+    border-radius: 10px;
+}
+
+/* ===============================
+   Footer Removal (Clean Look)
+   =============================== */
+
+footer {
+    visibility: hidden;
+}
