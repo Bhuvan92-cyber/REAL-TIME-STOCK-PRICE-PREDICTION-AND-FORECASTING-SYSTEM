@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: real_time_stock_prediction
+Version: 1.0.0
+Summary: Real-Time Stock Price Prediction and Market Analysis System
+Author: Final Year Project
+Requires-Python: >=3.9
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scikit-learn
+Requires-Dist: yfinance
+Requires-Dist: streamlit
+Dynamic: author
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
