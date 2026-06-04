@@ -1,0 +1,55 @@
+# Python cache files
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments (don't include)
+venv/
+env/
+ENV/
+stock/  # Local venv, Vercel will create its own
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test files (optional - only if not needed in production)
+tests/
+pytest.ini
+.pytest_cache/
+
+# Documentation (optional - reduce size)
+*.md
+docs/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Jupyter notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+.env.local
+.env.*.local
+
+# Data files (if large, keep only what's needed)
+logs/
+*.log
+
+# Development tools
+black/
+flake8/
+pylint/
+
+# Vercel specific
+.vercel/
