@@ -4,7 +4,7 @@ setup(
     name="real_time_stock_prediction",
     version="1.0.0",
     description="Real-Time Stock Price Prediction and Market Analysis System",
-    author="Final Year Project",
+    author="Ch Bhuvan Sri Varshith",
     packages=find_packages(),
     install_requires=[
         "numpy==2.2.6",
@@ -16,7 +16,7 @@ setup(
         "streamlit==1.52.1",
         "streamlit-autorefresh==1.0.1",
         "altair==6.0.0",
-        "yfinance==0.2.66",
+        "yfinance==0.2.43",  # Downgraded to remove the strict websockets>=13.0 requirement
         "PyYAML==6.0.1",
         "python-dateutil==2.9.0.post0",
         "pytz==2025.2",
@@ -30,7 +30,7 @@ setup(
         "plotly==5.18.0",
         "python-dotenv==1.0.0",
         "colorama==0.4.6",
-        "websockets==15.0.1",
+        "websockets==12.0",  # Capped below 13.0 to satisfy gradio[oauth]==4.44.1
     ],
     extras_require={
         "dev": [

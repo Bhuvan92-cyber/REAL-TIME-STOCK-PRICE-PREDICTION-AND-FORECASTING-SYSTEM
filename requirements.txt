@@ -15,7 +15,7 @@ streamlit-autorefresh==1.0.1
 altair
 gradio
 
-yfinance==0.2.66
+yfinance==0.2.43
 
 PyYAML==6.0.1
 
