@@ -13,6 +13,7 @@ transformers==4.36.2
 streamlit==1.52.1
 streamlit-autorefresh==1.0.1
 altair
+gradio
 
 yfinance==0.2.66
 
