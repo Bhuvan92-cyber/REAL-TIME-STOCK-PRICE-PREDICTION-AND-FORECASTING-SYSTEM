@@ -1,3 +1,4 @@
+LICENSE
 README.md
 setup.py
 modules/__init__.py
@@ -12,9 +13,18 @@ modules/feature_engineering/trend_features.py
 modules/feature_engineering/volatility_features.py
 modules/ingestion/__init__.py
 modules/ingestion/alpha_vantage_fetcher.py
+modules/ingestion/live_data_fetcher.py
 modules/ingestion/realtime_stream.py
 modules/ingestion/yahoo_fetcher.py
 modules/models/__init__.py
+modules/models/deep_learning/__init__.py
+modules/models/deep_learning/cnn_lstm_model.py
+modules/models/deep_learning/lstm_model.py
+modules/models/deep_learning/model_utils.py
+modules/models/regression/__init__.py
+modules/models/regression/linear_regression.py
+modules/models/regression/random_forest.py
+modules/models/regression/xgboost_model.py
 modules/prediction/__init__.py
 modules/prediction/predictor.py
 modules/prediction/signal_generator.py
@@ -38,6 +48,7 @@ modules/utils/__init__.py
 modules/utils/config_loader.py
 modules/utils/helpers.py
 modules/utils/logger.py
+modules/utils/stock_data_loader.py
 real_time_stock_prediction.egg-info/PKG-INFO
 real_time_stock_prediction.egg-info/SOURCES.txt
 real_time_stock_prediction.egg-info/dependency_links.txt
@@ -47,3 +58,4 @@ tests/test_ingestion.py
 tests/test_models.py
 tests/test_prediction.py
 tests/test_preprocessing.py
+tests/test_system.py

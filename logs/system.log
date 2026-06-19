@@ -2496,3 +2496,205 @@ Feature engineering completed for NIFTY50
 2026-04-04 09:42:17,237 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
 2026-04-04 09:42:37,962 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
 2026-04-04 09:42:37,962 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 10:50:20,959 | INFO | __main__ | Starting full pipeline execution
+2026-06-19 10:50:20,965 | INFO | __main__ | 
+============================================================
+2026-06-19 10:50:20,966 | INFO | __main__ | Processing AAPL
+2026-06-19 10:50:20,966 | INFO | __main__ | ============================================================
+
+2026-06-19 10:50:20,966 | INFO | modules.ingestion.yahoo_fetcher | Fetching Yahoo Finance data for AAPL for period 5y
+2026-06-19 10:50:22,443 | INFO | modules.preprocessing.data_cleaner | Starting data cleaning process
+2026-06-19 10:50:22,447 | INFO | modules.preprocessing.data_cleaner | Data cleaning completed
+2026-06-19 10:50:22,447 | INFO | modules.preprocessing.missing_value_handler | Handling missing values
+2026-06-19 10:50:22,450 | INFO | modules.preprocessing.missing_value_handler | Missing value handling completed
+2026-06-19 10:50:22,450 | INFO | modules.feature_engineering.trend_features | Adding trend features
+2026-06-19 10:50:22,453 | INFO | modules.feature_engineering.trend_features | Trend features added successfully
+2026-06-19 10:50:22,453 | INFO | modules.feature_engineering.technical_indicators | Adding technical indicators
+2026-06-19 10:50:22,461 | INFO | modules.feature_engineering.technical_indicators | Technical indicators added successfully
+2026-06-19 10:50:22,461 | INFO | modules.feature_engineering.volatility_features | Adding volatility features
+2026-06-19 10:50:22,462 | INFO | modules.feature_engineering.volatility_features | Volatility features added successfully
+2026-06-19 10:50:22,462 | INFO | modules.feature_engineering.lag_features | Adding lag features for close
+2026-06-19 10:50:22,465 | INFO | modules.feature_engineering.lag_features | Lag features added successfully
+2026-06-19 10:50:22,531 | INFO | modules.utils.helpers | Appended new data to data/processed/AAPL_feature_engineered.csv
+2026-06-19 10:50:22,531 | INFO | __main__ | 
+Feature engineering completed for AAPL
+2026-06-19 10:50:22,531 | INFO | __main__ | Shape: (1235, 25), Columns: ['date', 'open', 'high', 'low', 'close', 'volume', 'dividends', 'stock splits', 'returns', 'log_returns', 'trend_direction', 'sma_20', 'ema_20', 'rsi', 'macd', 'macd_signal', 'bb_upper', 'bb_lower', 'volatility', 'high_low_range', 'close_lag_1', 'close_lag_2', 'close_lag_3', 'close_lag_4', 'close_lag_5']
+2026-06-19 10:50:22,531 | INFO | modules.preprocessing.normalizer | Starting data normalization
+2026-06-19 10:50:22,537 | INFO | modules.preprocessing.normalizer | Scaler saved at models_saved/AAPL_scaler.pkl
+2026-06-19 10:50:22,537 | INFO | modules.preprocessing.normalizer | Data normalization completed
+2026-06-19 10:50:22,538 | INFO | modules.training.trainer | Starting regression model training
+2026-06-19 10:50:22,539 | INFO | modules.models.regression.random_forest | Training Random Forest Regressor
+2026-06-19 10:50:23,363 | INFO | modules.training.trainer | Regression model training completed
+2026-06-19 10:50:23,464 | INFO | modules.models.regression.random_forest | Random Forest model saved at models_saved/AAPL_random_forest.pkl
+2026-06-19 10:50:23,465 | INFO | __main__ | Evaluation Metrics for AAPL: {'MAE': 0.0773, 'RMSE': np.float64(0.1114), 'R2 Score': 0.3401, 'Directional Accuracy': np.float64(73.98)}
+2026-06-19 10:50:23,466 | INFO | __main__ | 
+============================================================
+2026-06-19 10:50:23,466 | INFO | __main__ | Processing TCS
+2026-06-19 10:50:23,466 | INFO | __main__ | ============================================================
+
+2026-06-19 10:50:23,466 | INFO | modules.ingestion.yahoo_fetcher | Fetching Yahoo Finance data for TCS.NS for period 5y
+2026-06-19 10:50:23,741 | INFO | modules.preprocessing.data_cleaner | Starting data cleaning process
+2026-06-19 10:50:23,745 | INFO | modules.preprocessing.data_cleaner | Data cleaning completed
+2026-06-19 10:50:23,745 | INFO | modules.preprocessing.missing_value_handler | Handling missing values
+2026-06-19 10:50:23,747 | INFO | modules.preprocessing.missing_value_handler | Missing value handling completed
+2026-06-19 10:50:23,747 | INFO | modules.feature_engineering.trend_features | Adding trend features
+2026-06-19 10:50:23,749 | INFO | modules.feature_engineering.trend_features | Trend features added successfully
+2026-06-19 10:50:23,749 | INFO | modules.feature_engineering.technical_indicators | Adding technical indicators
+2026-06-19 10:50:23,753 | INFO | modules.feature_engineering.technical_indicators | Technical indicators added successfully
+2026-06-19 10:50:23,753 | INFO | modules.feature_engineering.volatility_features | Adding volatility features
+2026-06-19 10:50:23,755 | INFO | modules.feature_engineering.volatility_features | Volatility features added successfully
+2026-06-19 10:50:23,755 | INFO | modules.feature_engineering.lag_features | Adding lag features for close
+2026-06-19 10:50:23,757 | INFO | modules.feature_engineering.lag_features | Lag features added successfully
+2026-06-19 10:50:23,800 | INFO | modules.utils.helpers | Appended new data to data/processed/TCS_feature_engineered.csv
+2026-06-19 10:50:23,801 | INFO | __main__ | 
+Feature engineering completed for TCS
+2026-06-19 10:50:23,801 | INFO | __main__ | Shape: (1218, 25), Columns: ['date', 'open', 'high', 'low', 'close', 'volume', 'dividends', 'stock splits', 'returns', 'log_returns', 'trend_direction', 'sma_20', 'ema_20', 'rsi', 'macd', 'macd_signal', 'bb_upper', 'bb_lower', 'volatility', 'high_low_range', 'close_lag_1', 'close_lag_2', 'close_lag_3', 'close_lag_4', 'close_lag_5']
+2026-06-19 10:50:23,801 | INFO | modules.preprocessing.normalizer | Starting data normalization
+2026-06-19 10:50:23,806 | INFO | modules.preprocessing.normalizer | Scaler saved at models_saved/TCS_scaler.pkl
+2026-06-19 10:50:23,807 | INFO | modules.preprocessing.normalizer | Data normalization completed
+2026-06-19 10:50:23,807 | INFO | modules.training.trainer | Starting regression model training
+2026-06-19 10:50:23,809 | INFO | modules.models.regression.random_forest | Training Random Forest Regressor
+2026-06-19 10:50:24,566 | INFO | modules.training.trainer | Regression model training completed
+2026-06-19 10:50:24,663 | INFO | modules.models.regression.random_forest | Random Forest model saved at models_saved/TCS_random_forest.pkl
+2026-06-19 10:50:24,664 | INFO | __main__ | Evaluation Metrics for TCS: {'MAE': 0.0465, 'RMSE': np.float64(0.0842), 'R2 Score': 0.7046, 'Directional Accuracy': np.float64(80.25)}
+2026-06-19 10:50:24,664 | INFO | __main__ | 
+============================================================
+2026-06-19 10:50:24,665 | INFO | __main__ | Processing NIFTY50
+2026-06-19 10:50:24,665 | INFO | __main__ | ============================================================
+
+2026-06-19 10:50:24,665 | INFO | modules.ingestion.yahoo_fetcher | Fetching Yahoo Finance data for ^NSEI for period 5y
+2026-06-19 10:50:24,863 | INFO | modules.preprocessing.data_cleaner | Starting data cleaning process
+2026-06-19 10:50:24,867 | INFO | modules.preprocessing.data_cleaner | Data cleaning completed
+2026-06-19 10:50:24,867 | INFO | modules.preprocessing.missing_value_handler | Handling missing values
+2026-06-19 10:50:24,870 | INFO | modules.preprocessing.missing_value_handler | Missing value handling completed
+2026-06-19 10:50:24,870 | INFO | modules.feature_engineering.trend_features | Adding trend features
+2026-06-19 10:50:24,872 | INFO | modules.feature_engineering.trend_features | Trend features added successfully
+2026-06-19 10:50:24,873 | INFO | modules.feature_engineering.technical_indicators | Adding technical indicators
+2026-06-19 10:50:24,878 | INFO | modules.feature_engineering.technical_indicators | Technical indicators added successfully
+2026-06-19 10:50:24,878 | INFO | modules.feature_engineering.volatility_features | Adding volatility features
+2026-06-19 10:50:24,879 | INFO | modules.feature_engineering.volatility_features | Volatility features added successfully
+2026-06-19 10:50:24,879 | INFO | modules.feature_engineering.lag_features | Adding lag features for close
+2026-06-19 10:50:24,881 | INFO | modules.feature_engineering.lag_features | Lag features added successfully
+2026-06-19 10:50:24,921 | INFO | modules.utils.helpers | Appended new data to data/processed/NIFTY50_feature_engineered.csv
+2026-06-19 10:50:24,921 | INFO | __main__ | 
+Feature engineering completed for NIFTY50
+2026-06-19 10:50:24,921 | INFO | __main__ | Shape: (1215, 25), Columns: ['date', 'open', 'high', 'low', 'close', 'volume', 'dividends', 'stock splits', 'returns', 'log_returns', 'trend_direction', 'sma_20', 'ema_20', 'rsi', 'macd', 'macd_signal', 'bb_upper', 'bb_lower', 'volatility', 'high_low_range', 'close_lag_1', 'close_lag_2', 'close_lag_3', 'close_lag_4', 'close_lag_5']
+2026-06-19 10:50:24,921 | INFO | modules.preprocessing.normalizer | Starting data normalization
+2026-06-19 10:50:24,927 | INFO | modules.preprocessing.normalizer | Scaler saved at models_saved/NIFTY50_scaler.pkl
+2026-06-19 10:50:24,927 | INFO | modules.preprocessing.normalizer | Data normalization completed
+2026-06-19 10:50:24,928 | INFO | modules.training.trainer | Starting regression model training
+2026-06-19 10:50:24,930 | INFO | modules.models.regression.random_forest | Training Random Forest Regressor
+2026-06-19 10:50:25,663 | INFO | modules.training.trainer | Regression model training completed
+2026-06-19 10:50:25,756 | INFO | modules.models.regression.random_forest | Random Forest model saved at models_saved/NIFTY50_random_forest.pkl
+2026-06-19 10:50:25,757 | INFO | __main__ | Evaluation Metrics for NIFTY50: {'MAE': 0.0078, 'RMSE': np.float64(0.0103), 'R2 Score': 0.9853, 'Directional Accuracy': np.float64(81.82)}
+2026-06-19 10:50:25,758 | INFO | __main__ | 
+============================================================
+2026-06-19 10:50:25,758 | INFO | __main__ | Pipeline execution completed for all stocks
+2026-06-19 10:50:25,758 | INFO | __main__ | ============================================================
+2026-06-19 10:50:37,517 | INFO | __main__ | Starting model training pipeline
+2026-06-19 10:50:37,523 | INFO | __main__ | 
+============================================================
+2026-06-19 10:50:37,523 | INFO | __main__ | Training models for AAPL
+2026-06-19 10:50:37,523 | INFO | __main__ | ============================================================
+
+2026-06-19 10:50:37,568 | INFO | __main__ | Loaded data shape: (8651, 25)
+2026-06-19 10:50:37,569 | INFO | modules.training.trainer | Starting regression model training
+2026-06-19 10:50:37,570 | INFO | modules.models.regression.random_forest | Training Random Forest Regressor
+2026-06-19 10:50:42,158 | INFO | modules.training.trainer | Regression model training completed
+2026-06-19 10:50:42,374 | INFO | modules.models.regression.random_forest | Random Forest model saved at models_saved/AAPL_random_forest.pkl
+2026-06-19 10:50:42,375 | INFO | __main__ | Random Forest Metrics for AAPL: {'MAE': 0.5541, 'RMSE': np.float64(2.7235), 'R2 Score': 0.996, 'Directional Accuracy': np.float64(95.14)}
+2026-06-19 10:50:42,383 | INFO | __main__ | Random Forest training completed
+2026-06-19 10:50:42,396 | INFO | __main__ | LSTM data prepared: X shape (8591, 60, 1), y shape (8591,)
+2026-06-19 10:50:43,369 | INFO | __main__ | Starting CNN-LSTM training
+2026-06-19 10:50:44,981 | INFO | __main__ | CNN-LSTM Epoch [1/10] - Loss: 0.115693
+2026-06-19 10:50:46,394 | INFO | __main__ | CNN-LSTM Epoch [2/10] - Loss: 0.089606
+2026-06-19 10:50:47,946 | INFO | __main__ | CNN-LSTM Epoch [3/10] - Loss: 0.068167
+2026-06-19 10:50:49,459 | INFO | __main__ | CNN-LSTM Epoch [4/10] - Loss: 0.051197
+2026-06-19 10:50:50,940 | INFO | __main__ | CNN-LSTM Epoch [5/10] - Loss: 0.038596
+2026-06-19 10:50:52,326 | INFO | __main__ | CNN-LSTM Epoch [6/10] - Loss: 0.030307
+2026-06-19 10:50:53,670 | INFO | __main__ | CNN-LSTM Epoch [7/10] - Loss: 0.026255
+2026-06-19 10:50:55,103 | INFO | __main__ | CNN-LSTM Epoch [8/10] - Loss: 0.025914
+2026-06-19 10:50:56,520 | INFO | __main__ | CNN-LSTM Epoch [9/10] - Loss: 0.027685
+2026-06-19 10:50:57,858 | INFO | __main__ | CNN-LSTM Epoch [10/10] - Loss: 0.029186
+2026-06-19 10:50:57,859 | INFO | __main__ | CNN-LSTM model saved at models_saved/cnn_lstm_model.pt
+2026-06-19 10:50:57,864 | INFO | __main__ | LSTM scaler saved at models_saved/AAPL_lstm_scaler.pkl
+2026-06-19 10:50:57,864 | INFO | __main__ | Model training completed for AAPL
+2026-06-19 10:50:57,864 | INFO | __main__ | 
+============================================================
+2026-06-19 10:50:57,864 | INFO | __main__ | Training models for TCS
+2026-06-19 10:50:57,865 | INFO | __main__ | ============================================================
+
+2026-06-19 10:50:57,892 | INFO | __main__ | Loaded data shape: (6083, 25)
+2026-06-19 10:50:57,898 | INFO | modules.training.trainer | Starting regression model training
+2026-06-19 10:50:57,899 | INFO | modules.models.regression.random_forest | Training Random Forest Regressor
+2026-06-19 10:51:01,390 | INFO | modules.training.trainer | Regression model training completed
+2026-06-19 10:51:01,597 | INFO | modules.models.regression.random_forest | Random Forest model saved at models_saved/TCS_random_forest.pkl
+2026-06-19 10:51:01,599 | INFO | __main__ | Random Forest Metrics for TCS: {'MAE': 16.9725, 'RMSE': np.float64(35.6385), 'R2 Score': 0.993, 'Directional Accuracy': np.float64(82.24)}
+2026-06-19 10:51:01,603 | INFO | __main__ | Random Forest training completed
+2026-06-19 10:51:01,612 | INFO | __main__ | LSTM data prepared: X shape (6023, 60, 1), y shape (6023,)
+2026-06-19 10:51:01,954 | INFO | __main__ | Starting CNN-LSTM training
+2026-06-19 10:51:02,981 | INFO | __main__ | CNN-LSTM Epoch [1/10] - Loss: 0.317396
+2026-06-19 10:51:04,119 | INFO | __main__ | CNN-LSTM Epoch [2/10] - Loss: 0.258064
+2026-06-19 10:51:05,112 | INFO | __main__ | CNN-LSTM Epoch [3/10] - Loss: 0.206204
+2026-06-19 10:51:06,142 | INFO | __main__ | CNN-LSTM Epoch [4/10] - Loss: 0.161086
+2026-06-19 10:51:07,188 | INFO | __main__ | CNN-LSTM Epoch [5/10] - Loss: 0.122111
+2026-06-19 10:51:08,134 | INFO | __main__ | CNN-LSTM Epoch [6/10] - Loss: 0.088880
+2026-06-19 10:51:09,112 | INFO | __main__ | CNN-LSTM Epoch [7/10] - Loss: 0.061295
+2026-06-19 10:51:09,856 | INFO | __main__ | CNN-LSTM Epoch [8/10] - Loss: 0.039594
+2026-06-19 10:51:10,348 | INFO | __main__ | CNN-LSTM Epoch [9/10] - Loss: 0.024312
+2026-06-19 10:51:10,911 | INFO | __main__ | CNN-LSTM Epoch [10/10] - Loss: 0.016109
+2026-06-19 10:51:10,912 | INFO | __main__ | CNN-LSTM model saved at models_saved/cnn_lstm_model.pt
+2026-06-19 10:51:10,916 | INFO | __main__ | LSTM scaler saved at models_saved/TCS_lstm_scaler.pkl
+2026-06-19 10:51:10,917 | INFO | __main__ | Model training completed for TCS
+2026-06-19 10:51:10,917 | INFO | __main__ | 
+============================================================
+2026-06-19 10:51:10,917 | INFO | __main__ | Training models for NIFTY50
+2026-06-19 10:51:10,917 | INFO | __main__ | ============================================================
+
+2026-06-19 10:51:10,945 | INFO | __main__ | Loaded data shape: (6076, 25)
+2026-06-19 10:51:10,947 | INFO | modules.training.trainer | Starting regression model training
+2026-06-19 10:51:10,948 | INFO | modules.models.regression.random_forest | Training Random Forest Regressor
+2026-06-19 10:51:13,335 | INFO | modules.training.trainer | Regression model training completed
+2026-06-19 10:51:13,468 | INFO | modules.models.regression.random_forest | Random Forest model saved at models_saved/NIFTY50_random_forest.pkl
+2026-06-19 10:51:13,470 | INFO | __main__ | Random Forest Metrics for NIFTY50: {'MAE': 5.4345, 'RMSE': np.float64(25.2949), 'R2 Score': 0.9999, 'Directional Accuracy': np.float64(98.77)}
+2026-06-19 10:51:13,475 | INFO | __main__ | Random Forest training completed
+2026-06-19 10:51:13,482 | INFO | __main__ | LSTM data prepared: X shape (6016, 60, 1), y shape (6016,)
+2026-06-19 10:51:13,824 | INFO | __main__ | Starting CNN-LSTM training
+2026-06-19 10:51:14,366 | INFO | __main__ | CNN-LSTM Epoch [1/10] - Loss: 0.397408
+2026-06-19 10:51:14,874 | INFO | __main__ | CNN-LSTM Epoch [2/10] - Loss: 0.328572
+2026-06-19 10:51:15,387 | INFO | __main__ | CNN-LSTM Epoch [3/10] - Loss: 0.269450
+2026-06-19 10:51:15,936 | INFO | __main__ | CNN-LSTM Epoch [4/10] - Loss: 0.218434
+2026-06-19 10:51:16,435 | INFO | __main__ | CNN-LSTM Epoch [5/10] - Loss: 0.174327
+2026-06-19 10:51:16,947 | INFO | __main__ | CNN-LSTM Epoch [6/10] - Loss: 0.136380
+2026-06-19 10:51:17,476 | INFO | __main__ | CNN-LSTM Epoch [7/10] - Loss: 0.104241
+2026-06-19 10:51:17,984 | INFO | __main__ | CNN-LSTM Epoch [8/10] - Loss: 0.077886
+2026-06-19 10:51:18,472 | INFO | __main__ | CNN-LSTM Epoch [9/10] - Loss: 0.057553
+2026-06-19 10:51:19,035 | INFO | __main__ | CNN-LSTM Epoch [10/10] - Loss: 0.043645
+2026-06-19 10:51:19,037 | INFO | __main__ | CNN-LSTM model saved at models_saved/cnn_lstm_model.pt
+2026-06-19 10:51:19,049 | INFO | __main__ | LSTM scaler saved at models_saved/NIFTY50_lstm_scaler.pkl
+2026-06-19 10:51:19,049 | INFO | __main__ | Model training completed for NIFTY50
+2026-06-19 10:51:19,049 | INFO | __main__ | 
+============================================================
+2026-06-19 10:51:19,049 | INFO | __main__ | Model training pipeline completed for all stocks
+2026-06-19 10:51:19,049 | INFO | __main__ | ============================================================
+2026-06-19 10:53:33,936 | INFO | modules.prediction.signal_generator | Generating trading signal
+2026-06-19 10:53:33,937 | INFO | modules.prediction.signal_generator | Current: 298.010009765625, Predicted: 282.9440951538086, Signal: SELL
+2026-06-19 10:53:36,868 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 10:53:36,868 | INFO | modules.risk_management.volatility_risk | Calculating volatility risk
+2026-06-19 10:53:36,880 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 10:53:40,218 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 10:53:40,218 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 10:54:09,843 | INFO | modules.prediction.signal_generator | Generating trading signal
+2026-06-19 10:54:09,843 | INFO | modules.prediction.signal_generator | Current: 2125.0, Predicted: 2426.566435546875, Signal: BUY
+2026-06-19 10:54:12,160 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 10:54:12,160 | INFO | modules.risk_management.volatility_risk | Calculating volatility risk
+2026-06-19 10:54:12,168 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 10:54:14,201 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 10:54:14,201 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 10:54:26,295 | INFO | modules.prediction.signal_generator | Generating trading signal
+2026-06-19 10:54:26,295 | INFO | modules.prediction.signal_generator | Current: 24013.099609375, Predicted: 23892.13326171875, Signal: SELL
+2026-06-19 10:54:28,273 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 10:54:28,273 | INFO | modules.risk_management.volatility_risk | Calculating volatility risk
+2026-06-19 10:54:28,282 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 10:54:29,381 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 10:54:29,381 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown

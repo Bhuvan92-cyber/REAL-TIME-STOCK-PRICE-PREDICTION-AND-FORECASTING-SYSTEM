@@ -14,7 +14,7 @@ setup(
         "torch==2.1.2",
         "transformers==4.36.2",
         "streamlit==1.52.1",
-        "streamlit-autorefresh==0.0.2",
+        "streamlit-autorefresh==1.0.1",
         "altair==6.0.0",
         "yfinance==0.2.66",
         "PyYAML==6.0.1",
