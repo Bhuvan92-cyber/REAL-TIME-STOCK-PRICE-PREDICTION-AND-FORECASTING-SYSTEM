@@ -2698,3 +2698,24 @@ Feature engineering completed for NIFTY50
 2026-06-19 10:54:28,282 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
 2026-06-19 10:54:29,381 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
 2026-06-19 10:54:29,381 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 23:42:16,243 | INFO | modules.prediction.signal_generator | Generating trading signal
+2026-06-19 23:42:16,263 | INFO | modules.prediction.signal_generator | Current: 298.010009765625, Predicted: 282.9440951538086, Signal: SELL
+2026-06-19 23:42:20,722 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 23:42:20,722 | INFO | modules.risk_management.volatility_risk | Calculating volatility risk
+2026-06-19 23:42:20,731 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 23:42:24,334 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 23:42:24,334 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 23:42:50,828 | INFO | modules.prediction.signal_generator | Generating trading signal
+2026-06-19 23:42:50,828 | INFO | modules.prediction.signal_generator | Current: 2125.0, Predicted: 2426.566435546875, Signal: BUY
+2026-06-19 23:42:52,288 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 23:42:52,289 | INFO | modules.risk_management.volatility_risk | Calculating volatility risk
+2026-06-19 23:42:52,296 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 23:42:53,448 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 23:42:53,448 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 23:43:13,081 | INFO | modules.prediction.signal_generator | Generating trading signal
+2026-06-19 23:43:13,081 | INFO | modules.prediction.signal_generator | Current: 24013.099609375, Predicted: 23892.13326171875, Signal: SELL
+2026-06-19 23:43:15,179 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 23:43:15,180 | INFO | modules.risk_management.volatility_risk | Calculating volatility risk
+2026-06-19 23:43:15,187 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-06-19 23:43:19,074 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-06-19 23:43:19,074 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
