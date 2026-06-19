@@ -2,18 +2,37 @@ name: Sync to Hugging Face hub
 on:
   push:
     branches: [main]
-
-  # This allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 # Updated to v4 to prevent Node.js deprecation warnings
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          lfs: true
+          
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://Bhuvan06022005:$HF_TOKEN@huggingface.co/spaces/Bhuvan06022005/stock-price-prediction main
+        run: |
+          # 1. Remove the existing GitHub history to avoid pushing non-LFS binaries
+          rm -rf .git
+          
+          # 2. Initialize a fresh Git repository specifically for deployment
+          git init
+          git branch -M main
+          
+          # 3. Tell Git to track your PyTorch models using Git LFS
+          git lfs install
+          git lfs track "*.pt"
+          git add .gitattributes
+          
+          # 4. Stage and commit all your stock prediction files
+          git add .
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git commit -m "Automated deployment to Hugging Face Space"
+          
+          # 5. Force push this clean, LFS-tracked commit to Hugging Face
+          git push --force https://Bhuvan06022005:$HF_TOKEN@huggingface.co/spaces/Bhuvan06022005/stock-price-prediction main
