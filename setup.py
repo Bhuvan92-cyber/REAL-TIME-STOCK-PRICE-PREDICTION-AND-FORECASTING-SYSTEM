@@ -16,7 +16,7 @@ setup(
         "streamlit==1.52.1",
         "streamlit-autorefresh==1.0.1",
         "altair==6.0.0",
-        "yfinance==0.2.43",  # Downgraded to remove the strict websockets>=13.0 requirement
+        "yfinance==0.2.43",
         "PyYAML==6.0.1",
         "python-dateutil==2.9.0.post0",
         "pytz==2025.2",
@@ -30,8 +30,9 @@ setup(
         "plotly==5.18.0",
         "python-dotenv==1.0.0",
         "colorama==0.4.6",
-        "websockets==12.0",  # Capped below 13.0 to satisfy gradio[oauth]==4.44.1
-        "jinja2<3.1.5",
+        "websockets==12.0",
+        "starlette<1.0.0",    # Fixes the TemplateResponse dictionary crash
+        "fastapi<0.135.0",    # Keeps FastAPI compatible with the older Starlette
     ],
     extras_require={
         "dev": [
