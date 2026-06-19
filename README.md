@@ -1,3 +1,16 @@
+---
+title: Stock Price Prediction
+emoji: 📈
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: "4.0.0"
+python_version: "3.10"
+app_file: app.py
+pinned: false
+---
+
+
 # 📈 Real-Time Stock Market Analysis & Prediction System
 
 A comprehensive full-stack machine learning system for **real-time stock price prediction**, **technical analysis**, and **risk management** with an interactive Streamlit dashboard.
