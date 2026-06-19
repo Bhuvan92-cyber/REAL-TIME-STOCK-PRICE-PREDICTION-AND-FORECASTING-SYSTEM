@@ -31,6 +31,7 @@ setup(
         "python-dotenv==1.0.0",
         "colorama==0.4.6",
         "websockets==12.0",  # Capped below 13.0 to satisfy gradio[oauth]==4.44.1
+        "jinja2<3.1.5",
     ],
     extras_require={
         "dev": [
