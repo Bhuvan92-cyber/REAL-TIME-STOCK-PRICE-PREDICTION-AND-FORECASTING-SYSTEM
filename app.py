@@ -103,4 +103,13 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
 # 5. Launch the App
 # ---------------------------------------------------------
 if __name__ == "__main__":
-    demo.launch()
+    try:
+        demo.launch()
+    except ValueError as e:
+        # When running inside some containers or CI, localhost may be inaccessible.
+        # Fall back to creating a shareable link and binding to 0.0.0.0.
+        msg = str(e)
+        if "shareable link" in msg or "share=True" in msg:
+            demo.launch(share=True, server_name="0.0.0.0")
+        else:
+            raise
