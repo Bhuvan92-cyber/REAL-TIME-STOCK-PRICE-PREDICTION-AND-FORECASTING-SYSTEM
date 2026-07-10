@@ -51,6 +51,21 @@ pip install -r requirements.txt
 streamlit run dashboard/app.py
 ```
 
+### Deployment note about heavy ML packages
+
+This repository includes heavy machine-learning and developer dependencies (PyTorch, Transformers, testing and linting tools). Installing them on Streamlit Cloud will likely fail or time out due to build-size and wheel availability constraints.
+
+What I changed for deployment
+- Created `requirements-dev.txt` with the full developer/ML/test dependencies.
+- Replaced `requirements.txt` with a minimal, Streamlit-friendly set. This keeps the runtime lightweight so Streamlit Cloud can install dependencies quickly.
+
+If your app requires the full ML stack in the cloud, consider one of these approaches:
+
+- Host the ML model separately as a lightweight API (Heroku/DigitalOcean/AWS/GCP) and call it from the Streamlit app.
+- Use a custom Docker deployment (VPS or cloud run) where you control the environment and can install large wheels.
+- Provide pre-built wheels or a private package index that Streamlit can access (advanced).
+
+
 ## 5. Auto Deploy on Push
 
 Streamlit Cloud automatically deploys when you push to the branch configured for the app. After the first deploy, subsequent pushes will trigger rebuilds.
