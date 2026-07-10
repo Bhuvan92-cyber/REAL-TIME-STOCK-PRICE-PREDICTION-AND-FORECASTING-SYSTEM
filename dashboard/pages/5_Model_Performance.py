@@ -69,7 +69,13 @@ try:
 
     # -------- Risk Metrics --------
 
-    returns = error / (y_true + 1e-8)  # Add small value to avoid division by zero
+    # Safe returns calculation
+    try:
+        denom = (y_true + 1e-8)
+        denom[denom == 0] = 1e-8
+        returns = error / denom
+    except Exception:
+        returns = np.array([])
 
     sharpe = calculate_sharpe_ratio(returns)
     max_dd = calculate_max_drawdown(returns)

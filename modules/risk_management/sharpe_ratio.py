@@ -13,13 +13,23 @@ def calculate_sharpe_ratio(
 
     logger.info("Calculating Sharpe Ratio")
 
-    returns = np.array(returns)
+    try:
+        returns = np.array(returns, dtype=float)
+    except Exception:
+        logger.warning("Invalid returns provided to calculate_sharpe_ratio; returning 0.0")
+        return 0.0
+
+    if returns.size == 0:
+        return 0.0
+
     excess_returns = returns - risk_free_rate
 
     std_dev = np.std(excess_returns)
 
-    if std_dev == 0:
+    if std_dev == 0 or np.isnan(std_dev):
         return 0.0
 
     sharpe = np.mean(excess_returns) / std_dev
-    return sharpe
+    if not np.isfinite(sharpe):
+        return 0.0
+    return float(sharpe)

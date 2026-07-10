@@ -24,4 +24,5 @@ def fetch_historical(ticker: str, period: str = "5y") -> pd.DataFrame:
         return df
     except Exception as e:
         logger.error(f"Error in fetch_historical: {e}")
-        raise
+        # Return empty DataFrame to allow callers to handle the absence of data
+        return pd.DataFrame()
