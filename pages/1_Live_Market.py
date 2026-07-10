@@ -68,7 +68,16 @@ try:
         df = fetch_live_stock_data(ticker, interval="1h", period="5d")
     
     if df.empty:
-        st.warning(f"No live data available for {symbol}")
+        st.error(f"Unable to fetch live market data for {symbol}")
+
+        st.info(
+            "Yahoo Finance did not return any data. "
+            "This may be due to temporary rate limits or "
+            "market availability."
+        )
+
+        st.write("Ticker:", ticker)
+
         st.stop()
     
     # Ensure lowercase columns
