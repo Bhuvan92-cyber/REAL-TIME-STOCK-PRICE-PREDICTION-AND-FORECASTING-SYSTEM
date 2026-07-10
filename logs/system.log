@@ -2719,3 +2719,26 @@ Feature engineering completed for NIFTY50
 2026-06-19 23:43:15,187 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
 2026-06-19 23:43:19,074 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
 2026-06-19 23:43:19,074 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-07-10 11:51:05,365 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-07-10 11:51:06,074 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-07-10 15:20:37,296 | INFO | modules.prediction.signal_generator | Generating trading signal
+2026-07-10 15:20:37,381 | INFO | modules.prediction.signal_generator | Current: 298.010009765625, Predicted: 282.9440951538086, Signal: SELL
+2026-07-10 15:20:53,202 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-07-10 15:20:53,202 | INFO | modules.risk_management.volatility_risk | Calculating volatility risk
+2026-07-10 15:20:53,209 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-07-10 15:20:56,531 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-07-10 15:20:56,532 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-07-10 15:21:45,408 | INFO | modules.prediction.signal_generator | Generating trading signal
+2026-07-10 15:21:45,408 | INFO | modules.prediction.signal_generator | Current: 2125.0, Predicted: 2426.566435546875, Signal: BUY
+2026-07-10 15:22:16,279 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-07-10 15:22:16,279 | INFO | modules.risk_management.volatility_risk | Calculating volatility risk
+2026-07-10 15:22:16,287 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-07-10 15:22:17,536 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-07-10 15:22:17,536 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-07-10 15:22:47,390 | INFO | modules.prediction.signal_generator | Generating trading signal
+2026-07-10 15:22:47,390 | INFO | modules.prediction.signal_generator | Current: 24013.099609375, Predicted: 23892.13326171875, Signal: SELL
+2026-07-10 15:22:50,034 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-07-10 15:22:50,034 | INFO | modules.risk_management.volatility_risk | Calculating volatility risk
+2026-07-10 15:22:50,041 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
+2026-07-10 15:22:51,568 | INFO | modules.risk_management.sharpe_ratio | Calculating Sharpe Ratio
+2026-07-10 15:22:51,568 | INFO | modules.risk_management.max_drawdown | Calculating Maximum Drawdown
