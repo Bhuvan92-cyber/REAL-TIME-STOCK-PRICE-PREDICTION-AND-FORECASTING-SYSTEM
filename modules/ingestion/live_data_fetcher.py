@@ -1,149 +1,127 @@
-import time
 import logging
+import time
+from pathlib import Path
+
 import pandas as pd
 import yfinance as yf
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Fallback intervals
+INTERVAL_FALLBACKS = {
+    "1m": ["1m", "5m", "15m", "30m", "1h"],
+    "5m": ["5m", "15m", "30m", "1h"],
+    "15m": ["15m", "30m", "1h"],
+    "1h": ["1h", "1d"],
+    "1d": ["1d"]
+}
+
+
+def _load_cached_data(ticker: str) -> pd.DataFrame:
+    """
+    Load cached feature-engineered data if Yahoo fails.
+    """
+
+    cache_file = Path(f"data/processed/{ticker}_feature_engineered.csv")
+
+    if cache_file.exists():
+
+        logger.warning(f"Using cached data: {cache_file}")
+
+        df = pd.read_csv(cache_file)
+
+        df.columns = [c.lower() for c in df.columns]
+
+        return df
+
+    return pd.DataFrame()
 
 
 def fetch_live_stock_data(
-    ticker,
-    interval="1m",
-    period="1d",
-    max_retries=3,
-    backoff=2
-):
+    ticker: str,
+    interval: str = "1m",
+    period: str = "1d",
+    retries: int = 3
+) -> pd.DataFrame:
     """
-    Fetch live stock market data from Yahoo Finance.
+    Production-grade Yahoo Finance downloader.
 
-    Features:
-    ---------
-    ✓ Automatic retries
-    ✓ Multiple fallback intervals
-    ✓ Handles MultiIndex columns
-    ✓ Works for US & NSE stocks
-    ✓ Production ready
+    Features
+    --------
+    ✓ Uses Ticker.history()
+    ✓ Retries failed requests
+    ✓ Falls back to larger intervals
+    ✓ Uses cached CSV if Yahoo fails
     """
 
-    # Different fallback combinations
-    fallback_attempts = [
-        ("1m", "1d"),
-        ("5m", "5d"),
-        ("15m", "5d"),
-        ("30m", "1mo"),
-        ("1h", "1mo"),
-        ("1d", "3mo"),
-    ]
+    stock = yf.Ticker(ticker)
 
-    # Try requested interval first
-    attempts = [(interval, period)]
+    intervals = INTERVAL_FALLBACKS.get(interval, [interval])
 
-    # Add fallback attempts (avoid duplicates)
-    for item in fallback_attempts:
-        if item not in attempts:
-            attempts.append(item)
-
-    for current_interval, current_period in attempts:
+    for current_interval in intervals:
 
         logger.info(
             f"Trying Yahoo Finance: "
-            f"{ticker} | "
-            f"{current_interval} | "
-            f"{current_period}"
+            f"{ticker} | {current_interval} | {period}"
         )
 
-        retry = 0
-
-        while retry < max_retries:
+        for attempt in range(retries):
 
             try:
 
-                df = yf.download(
-                    tickers=ticker,
+                df = stock.history(
+                    period=period,
                     interval=current_interval,
-                    period=current_period,
-                    progress=False,
-                    auto_adjust=True,
-                    threads=False,
+                    auto_adjust=False,
                     prepost=False,
+                    actions=False
                 )
 
-                # Empty dataframe
-                if df is None or df.empty:
-                    logger.warning(
-                        f"No data returned "
-                        f"({current_interval}, {current_period})"
+                if not df.empty:
+
+                    if isinstance(df.columns, pd.MultiIndex):
+                        df.columns = df.columns.get_level_values(0)
+
+                    df.columns = [
+                        c.lower()
+                        for c in df.columns
+                    ]
+
+                    df.reset_index(inplace=True)
+
+                    logger.info(
+                        f"Fetched {len(df)} rows "
+                        f"using interval={current_interval}"
                     )
 
-                    retry += 1
-                    time.sleep(backoff * retry)
-                    continue
+                    return df
 
-                # MultiIndex -> Single Index
-                if isinstance(df.columns, pd.MultiIndex):
-                    df.columns = df.columns.get_level_values(0)
-
-                # Lowercase columns
-                df.columns = [str(c).lower() for c in df.columns]
-
-                # Reset index
-                df = df.reset_index()
-
-                logger.info(
-                    f"Successfully downloaded "
-                    f"{len(df)} rows for {ticker}"
+                logger.warning(
+                    f"No data returned "
+                    f"({current_interval}, {period})"
                 )
-
-                return df
 
             except Exception as e:
 
-                logger.exception(
-                    f"Yahoo Finance download failed "
-                    f"({current_interval}, {current_period})"
+                logger.warning(
+                    f"Attempt {attempt+1}/{retries} "
+                    f"failed ({current_interval}): {e}"
                 )
 
-                retry += 1
-                time.sleep(backoff * retry)
+                time.sleep(2)
 
-    # --------------------------------------------------------
-    # Final fallback using yf.Ticker().history()
-    # --------------------------------------------------------
-
-    logger.info("Trying Ticker.history() fallback...")
-
-    try:
-
-        stock = yf.Ticker(ticker)
-
-        df = stock.history(
-            period="3mo",
-            interval="1d",
-            auto_adjust=True
+        logger.info(
+            f"Trying fallback interval..."
         )
 
-        if df is not None and not df.empty:
+    logger.error(
+        f"Yahoo Finance unavailable for {ticker}"
+    )
 
-            if isinstance(df.columns, pd.MultiIndex):
-                df.columns = df.columns.get_level_values(0)
+    cached_df = _load_cached_data(ticker)
 
-            df.columns = [str(c).lower() for c in df.columns]
+    if not cached_df.empty:
 
-            df = df.reset_index()
-
-            logger.info(
-                f"Ticker.history() returned "
-                f"{len(df)} rows."
-            )
-
-            return df
-
-    except Exception:
-
-        logger.exception("Ticker.history() also failed.")
-
-    logger.error(f"Unable to fetch any data for {ticker}")
+        return cached_df
 
     return pd.DataFrame()
