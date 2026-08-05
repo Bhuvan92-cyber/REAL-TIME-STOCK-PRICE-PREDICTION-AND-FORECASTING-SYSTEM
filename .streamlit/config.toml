@@ -1,8 +1,7 @@
+
 [server]
 headless = true
-enableCORS = false
 port = 8501
-address = "0.0.0.0"
 
-[global]
-unitTest = false
+[browser]
+gatherUsageStats = false
