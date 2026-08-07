@@ -1,3 +1,4 @@
+<<<<<<< HEAD:dashboard/pages/1_Live_Market.py
 import sys
 import os
 
@@ -112,3 +113,229 @@ except Exception as e:
     st.warning("Make sure you have internet connection and valid stock symbol.")
     with st.expander("Error Details"):
         st.write(str(e))
+=======
+import os
+import sys
+from datetime import datetime
+
+import pandas as pd
+import streamlit as st
+
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+)
+
+from modules.ingestion.live_data_fetcher import fetch_live_stock_data
+
+# ---------------------------------------------------
+# Auto Refresh
+# ---------------------------------------------------
+try:
+    from streamlit_autorefresh import st_autorefresh
+
+    st_autorefresh(interval=60000, key="live_market_refresh")
+
+except ImportError:
+    pass
+
+# ---------------------------------------------------
+# Page
+# ---------------------------------------------------
+
+st.header("📊 Live Market")
+
+# ---------------------------------------------------
+# Stocks
+# ---------------------------------------------------
+
+STOCK_OPTIONS = {
+    "AAPL": "Apple Inc. (NASDAQ)",
+    "TCS": "Tata Consultancy Services (NSE)",
+    "NIFTY50": "NIFTY 50 Index (NSE)"
+}
+
+TICKER_MAP = {
+    "AAPL": "AAPL",
+    "TCS": "TCS.NS",
+    "NIFTY50": "^NSEI"
+}
+
+symbol = st.session_state.get("selected_stock", "AAPL")
+
+ticker = TICKER_MAP[symbol]
+
+stock_name = STOCK_OPTIONS[symbol]
+
+# ---------------------------------------------------
+# Banner
+# ---------------------------------------------------
+
+st.markdown(
+    f"""
+<div style="
+padding:12px;
+background:#1f2937;
+border-radius:10px;
+color:white;
+font-size:18px;">
+📈 <b>Stock Selected:</b> {symbol} — {stock_name}
+</div>
+""",
+    unsafe_allow_html=True,
+)
+
+# ---------------------------------------------------
+# Cached Loader
+# ---------------------------------------------------
+
+@st.cache_data(ttl=60)
+def get_live_data(ticker, interval, period):
+    return fetch_live_stock_data(
+        ticker=ticker,
+        interval=interval,
+        period=period
+    )
+
+# ---------------------------------------------------
+# Download Data
+# ---------------------------------------------------
+
+with st.spinner("Fetching latest market data..."):
+
+    market_settings = {
+        "AAPL": ("1m", "1d"),
+        "TCS": ("5m", "5d"),
+        "NIFTY50": ("5m", "5d"),
+    }
+
+    interval, period = market_settings[symbol]
+
+    df = get_live_data(
+        ticker,
+        interval=interval,
+        period=period,
+    )
+
+# ---------------------------------------------------
+# Validation
+# ---------------------------------------------------
+
+if df is None or df.empty:
+
+    st.error("Unable to retrieve market data.")
+
+    st.stop()
+
+df.columns = [c.lower() for c in df.columns]
+
+# ---------------------------------------------------
+# Last Update
+# ---------------------------------------------------
+
+latest_time = df.index[-1]
+
+if isinstance(latest_time, pd.Timestamp):
+
+    last_updated = latest_time.strftime("%d-%b-%Y %I:%M %p")
+
+else:
+
+    last_updated = datetime.now().strftime("%d-%b-%Y %I:%M %p")
+
+st.success("🟢 Live Market Data")
+
+st.caption(f"Last Market Update : {last_updated}")
+
+# ---------------------------------------------------
+# Metrics
+# ---------------------------------------------------
+
+latest_close = float(df["close"].iloc[-1])
+latest_timestamp = pd.to_datetime(df.iloc[-1]["datetime"])
+
+st.caption(
+    f"Market data timestamp: {latest_timestamp.strftime('%d-%b-%Y %I:%M %p')}"
+)
+opening_price = float(df["open"].iloc[0])
+
+highest = float(df["high"].max())
+
+lowest = float(df["low"].min())
+
+change = latest_close - opening_price
+
+percent_change = (change / opening_price) * 100
+
+currency = "$" if symbol == "AAPL" else "₹"
+
+c1, c2, c3, c4 = st.columns(4)
+
+c1.metric(
+    "Current Price",
+    f"{currency}{latest_close:,.2f}",
+)
+
+c2.metric(
+    "Day Change",
+    f"{change:,.2f}",
+    f"{percent_change:.2f}%"
+)
+
+c3.metric(
+    "Day High",
+    f"{currency}{highest:,.2f}"
+)
+
+c4.metric(
+    "Day Low",
+    f"{currency}{lowest:,.2f}"
+)
+
+# ---------------------------------------------------
+# Charts
+# ---------------------------------------------------
+
+st.divider()
+
+st.subheader("Price Trend")
+
+st.line_chart(df["close"], use_container_width=True)
+
+if "volume" in df.columns:
+
+    st.subheader("Trading Volume")
+
+    st.bar_chart(df["volume"], use_container_width=True)
+
+# ---------------------------------------------------
+# Recent Market Data
+# ---------------------------------------------------
+
+st.divider()
+
+st.subheader("Latest Market Data")
+
+display_df = df.tail(10).copy()
+
+display_df.index.name = "Datetime"
+
+st.dataframe(
+    display_df,
+    use_container_width=True
+)
+
+# ---------------------------------------------------
+# Footer
+# ---------------------------------------------------
+
+st.info(
+    """
+Current Price is fetched directly from Yahoo Finance.
+
+Predictions in the project use the historical
+feature-engineered dataset and trained models.
+
+The current market price does not retrain the model.
+"""
+)
+>>>>>>> 9f58e0a (Improve live market dashboard and remove tracked virtual environment):Real-Time-Stock-Market-Analysis-And-Prediction-System/dashboard/pages/1_Live_Market.py

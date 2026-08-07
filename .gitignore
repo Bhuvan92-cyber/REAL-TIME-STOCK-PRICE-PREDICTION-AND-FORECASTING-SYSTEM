@@ -1,3 +1,4 @@
+<<<<<<< HEAD:.gitignore
 # Python
 __pycache__/
 *.pyc
@@ -31,3 +32,100 @@ Thumbs.db
 
 # Docker
 *.log
+=======
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dll
+
+# ==========================
+# Virtual Environments
+# ==========================
+.venv/
+venv/
+env/
+ENV/
+stock/
+
+# ==========================
+# Environment Variables
+# ==========================
+.env
+.env.*
+
+# ==========================
+# IDEs
+# ==========================
+.vscode/
+.idea/
+
+# ==========================
+# Jupyter
+# ==========================
+.ipynb_checkpoints/
+
+# ==========================
+# Logs
+# ==========================
+logs/
+*.log
+
+# ==========================
+# Python Build
+# ==========================
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# ==========================
+# Test & Coverage
+# ==========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ==========================
+# Type Checking
+# ==========================
+.mypy_cache/
+
+# ==========================
+# Operating System
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Streamlit
+# ==========================
+.streamlit/secrets.toml
+
+# ==========================
+# Temporary Files
+# ==========================
+*.tmp
+*.temp
+
+# ==========================
+# Optional Large Model Files
+# (Only uncomment if they exceed GitHub's limits)
+# ==========================
+# *.h5
+# *.pt
+# *.pth
+# *.onnx
+
+# ==========================
+# Optional Large Datasets
+# (Only uncomment if datasets become too large)
+# ==========================
+# data/raw/
+# data/processed/
+>>>>>>> 9f58e0a (Improve live market dashboard and remove tracked virtual environment):Real-Time-Stock-Market-Analysis-And-Prediction-System/.gitignore
