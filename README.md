@@ -1,3 +1,15 @@
+---
+title: Stock Price Prediction
+emoji: 📈
+colorFrom: blue
+colorTo: purple
+sdk: streamlit
+sdk_version: "1.52.1"
+python_version: "3.10"
+app_file: app.py
+pinned: false
+---
+
 # Real-Time Stock Market Analysis & Prediction
 
 A Python and Streamlit research application for exploring market data, technical indicators, next-session price estimates, and basic risk metrics for selected US and Indian market instruments.
