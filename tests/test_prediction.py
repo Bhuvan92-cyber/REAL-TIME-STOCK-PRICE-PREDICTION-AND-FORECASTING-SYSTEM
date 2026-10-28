@@ -1,4 +1,4 @@
-import numpy as np
+import pandas as pd
 from modules.prediction.signal_generator import generate_signal
 from modules.prediction.predictor import ModelPredictor
 
@@ -18,5 +18,5 @@ def test_model_predictor_regression():
     model = DummyModel()
     predictor = ModelPredictor(model, model_type="regression")
 
-    prediction = predictor.predict([[1]])
+    prediction = predictor.predict(pd.DataFrame({"feature": [1]}))
     assert prediction[0] == 110
