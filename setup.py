@@ -7,7 +7,7 @@ setup(
     author="Ch Bhuvan Sri Varshith",
     packages=find_packages(),
     install_requires=[
-        "numpy==2.2.6",
+        "numpy==1.26.4",
         "pandas==2.3.3",
         "scikit-learn==1.7.2",
         "joblib==1.5.3",
@@ -22,6 +22,7 @@ setup(
         "pytz==2025.2",
         "tzdata==2025.3",
         "scipy==1.15.3",
+        "statsmodels==0.14.5",
         "requests==2.32.5",
         "beautifulsoup4==4.14.3",
         "lxml==5.0.0",

@@ -1,5 +1,10 @@
 import streamlit as st
 
+st.set_page_config(
+    page_title="Real-Time Stock Market Analysis & Prediction",
+    layout="wide",
+)
+
 # -----------------------------
 # Global Stock Selection
 # -----------------------------
@@ -28,11 +33,6 @@ def load_css():
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 load_css()
-
-st.set_page_config(
-    page_title="Real-Time Stock Market Analysis & Prediction",
-    layout="wide"
-)
 
 st.title("📈 Real-Time Stock Market Analysis & Prediction System")
 st.markdown(

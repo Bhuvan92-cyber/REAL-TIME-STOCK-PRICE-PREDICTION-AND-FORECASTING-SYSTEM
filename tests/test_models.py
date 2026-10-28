@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import torch
 from modules.models.regression.linear_regression import LinearRegressionModel
 from modules.models.time_series.arima_model import ARIMAModel
 from modules.models.deep_learning.lstm_model import LSTMModel
