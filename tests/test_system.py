@@ -8,13 +8,14 @@ import sys
 import os
 import traceback
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, PROJECT_ROOT)
 
 from modules.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-def test_imports():
+def check_imports():
     """Test that all major modules can be imported"""
     logger.info("Testing imports...")
     tests_passed = 0
@@ -44,7 +45,7 @@ def test_imports():
     return tests_passed, tests_failed
 
 
-def test_data_loading():
+def check_data_loading():
     """Test that data can be loaded from yfinance"""
     logger.info("\nTesting data loading...")
     tests_passed = 0
@@ -70,7 +71,7 @@ def test_data_loading():
     return tests_passed, tests_failed
 
 
-def test_preprocessing():
+def check_preprocessing():
     """Test preprocessing functions"""
     logger.info("\nTesting preprocessing...")
     tests_passed = 0
@@ -116,7 +117,7 @@ def test_preprocessing():
     return tests_passed, tests_failed
 
 
-def test_feature_engineering():
+def check_feature_engineering():
     """Test feature engineering functions"""
     logger.info("\nTesting feature engineering...")
     tests_passed = 0
@@ -170,7 +171,7 @@ def test_feature_engineering():
     return tests_passed, tests_failed
 
 
-def test_models():
+def check_models():
     """Test model instantiation"""
     logger.info("\nTesting models...")
     tests_passed = 0
@@ -197,7 +198,7 @@ def test_models():
     return tests_passed, tests_failed
 
 
-def test_config():
+def check_config():
     """Test configuration loading"""
     logger.info("\nTesting configuration...")
     tests_passed = 0
@@ -225,27 +226,27 @@ def main():
     total_failed = 0
     
     # Run all tests
-    passed, failed = test_imports()
+    passed, failed = check_imports()
     total_passed += passed
     total_failed += failed
     
-    passed, failed = test_config()
+    passed, failed = check_config()
     total_passed += passed
     total_failed += failed
     
-    passed, failed = test_data_loading()
+    passed, failed = check_data_loading()
     total_passed += passed
     total_failed += failed
     
-    passed, failed = test_preprocessing()
+    passed, failed = check_preprocessing()
     total_passed += passed
     total_failed += failed
     
-    passed, failed = test_feature_engineering()
+    passed, failed = check_feature_engineering()
     total_passed += passed
     total_failed += failed
     
-    passed, failed = test_models()
+    passed, failed = check_models()
     total_passed += passed
     total_failed += failed
     
