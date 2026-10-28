@@ -150,7 +150,7 @@ python tests/test_system.py
 
 That diagnostic script includes live Yahoo Finance requests. It is not the same as the fast, offline-focused pytest command.
 
-A GitHub Actions workflow runs the network-independent pytest suite on pushes and pull requests.
+The workflow in `.github/workflows/python-tests.yml` runs this same non-integration pytest suite on pushes and pull requests.
 
 ## Repository map
 
