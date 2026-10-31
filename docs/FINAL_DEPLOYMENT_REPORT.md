@@ -67,6 +67,9 @@ The legacy Streamlit dependency set is now separated into
 `requirements-streamlit.txt`; the next CI run must verify the production
 requirements audit passes.
 
+The next CI run also needs the pinned `httpx` test dependency for Starlette's
+`TestClient`; the first Python 3.12 test execution exposed its absence.
+
 Live Supabase isolation, external market-data validation, and public URL smoke
 tests remain unverified.
 
