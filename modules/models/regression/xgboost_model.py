@@ -1,12 +1,19 @@
 import joblib
 import pandas as pd
-from xgboost import XGBRegressor
+
+try:
+    from xgboost import XGBRegressor
+except ImportError as exc:
+    XGBRegressor = None
+    _IMPORT_ERROR = exc
 from modules.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
 class XGBoostModel:
     def __init__(self):
+        if XGBRegressor is None:
+            raise RuntimeError(f"XGBoost is unavailable: {_IMPORT_ERROR}")
         self.model = XGBRegressor(
             n_estimators=300,
             learning_rate=0.05,

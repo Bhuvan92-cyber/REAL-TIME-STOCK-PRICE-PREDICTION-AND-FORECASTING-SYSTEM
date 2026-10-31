@@ -51,9 +51,9 @@ class ModelPredictor:
         logger.info(f"Running prediction using {self.model_type} model")
 
         if self.model_type == "regression":
-
-            if isinstance(X, pd.DataFrame):
+            if isinstance(X, (pd.DataFrame, np.ndarray, list, tuple)):
                 return self.model.predict(X)
+            raise TypeError("Regression predictors require tabular array-like input")
 
         elif self.model_type == "time_series":
 

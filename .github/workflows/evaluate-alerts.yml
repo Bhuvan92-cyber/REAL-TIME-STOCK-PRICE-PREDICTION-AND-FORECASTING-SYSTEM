@@ -1,0 +1,21 @@
+name: Evaluate stock alerts
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Evaluate active alerts
+        env:
+          API_URL: ${{ secrets.STOCK_API_URL }}
+          SCHEDULER_SECRET: ${{ secrets.ALERT_SCHEDULER_SECRET }}
+        run: |
+          test -n "$API_URL"
+          test -n "$SCHEDULER_SECRET"
+          curl --fail-with-body --retry 2 --request POST \
+            --header "X-Scheduler-Token: $SCHEDULER_SECRET" \
+            "$API_URL/api/v1/internal/alerts/evaluate"

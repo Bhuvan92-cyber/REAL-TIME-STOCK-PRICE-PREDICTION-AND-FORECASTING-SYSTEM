@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip
+      - run: pip install -r requirements.txt pytest
+      - run: pip check
+      - run: pip install pip-audit
+      - run: pip-audit -r requirements.txt --progress-spinner off
+      - run: python -m compileall -q api modules
+      - run: python -m pytest -m "not live_external" -q
+      - run: python -c "from pathlib import Path; files=sorted(Path('supabase/migrations').glob('*.sql')); numbers=[int(p.name.split('_',1)[0]) for p in files]; assert numbers == list(range(1, len(files)+1)) and len(files) >= 6"
+      - run: docker compose -f deployment/docker-compose.yml config --quiet
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm run build
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build API image
+        run: docker build --file deployment/Dockerfile.api --tag stock-analytics-api:ci .
+      - name: Build frontend image
+        run: docker build --file deployment/Dockerfile.frontend --tag stock-analytics-frontend:ci .
+      - name: Build Streamlit image
+        run: docker build --file deployment/Dockerfile.streamlit --tag stock-analytics-streamlit:ci .

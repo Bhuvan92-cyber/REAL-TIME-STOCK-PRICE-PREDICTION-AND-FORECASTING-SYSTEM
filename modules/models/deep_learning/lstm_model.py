@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
+from typing import Optional
 
 from modules.utils.logger import get_logger
 
@@ -19,12 +20,14 @@ class LSTMModel(nn.Module):
         input_size: int = 1,
         hidden_size: int = 64,
         num_layers: int = 2,
-        dropout: float = 0.2
+        dropout: float = 0.2,
+        seq_length: Optional[int] = None
     ):
         super(LSTMModel, self).__init__()
 
         self.hidden_size = hidden_size
         self.num_layers = num_layers
+        self.seq_length = seq_length
 
         self.lstm = nn.LSTM(
             input_size=input_size,

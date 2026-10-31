@@ -1,5 +1,5 @@
 # Base image with Python
-FROM python:3.10-slim
+FROM python:3.12-slim
 
 # Set working directory
 WORKDIR /app
@@ -19,7 +19,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copy project files
 COPY . .
 
-# Expose Streamlit port
+# Expose API and Streamlit ports
+EXPOSE 8000
 EXPOSE 8501
 
 # Run Streamlit app

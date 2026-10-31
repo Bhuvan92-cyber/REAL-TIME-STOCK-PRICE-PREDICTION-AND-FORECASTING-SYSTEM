@@ -6,7 +6,7 @@
 - [x] `requirements.txt` updated with compatible versions
 - [x] `.streamlit/config.toml` created
 - [x] `vercel.json` created
-- [x] Runtime Python 3.10 configured
+- [x] Runtime Python 3.12 configured
 
 ## Deployment Steps
 
@@ -35,7 +35,7 @@ In Vercel dashboard, add any required environment variables:
 - `STREAMLIT_SERVER_PORT=8501`
 
 ### 4. **Important Notes**
-- **Python Version**: 3.10 (specified in `vercel.json`)
+- **Python Version**: 3.12 (specified in `vercel.json`)
 - **Buildtime**: ~5-10 minutes (due to torch installation)
 - **Framework**: Streamlit
 - **Memory**: May need 3GB+ due to PyTorch dependency

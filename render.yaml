@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: stock-analytics-api
+    runtime: docker
+    dockerfilePath: ./deployment/Dockerfile.api
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: BILLING_ENABLED
+        value: "false"
+      - key: CORS_ORIGINS
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_JWT_SECRET
+        sync: false

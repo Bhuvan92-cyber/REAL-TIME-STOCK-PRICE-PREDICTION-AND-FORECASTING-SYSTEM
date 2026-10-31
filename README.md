@@ -5,13 +5,26 @@ colorFrom: blue
 colorTo: purple
 sdk: streamlit
 sdk_version: "4.44.1"
-python_version: "3.10"
+python_version: "3.12"
 app_file: app.py
 pinned: false
 ---
 
 
 # 📈 Real-Time Stock Market Analysis & Prediction System
+
+## Current release architecture
+
+The maintained deployment surface is the React/Vite frontend in `frontend/`
+and the FastAPI service in `api/`, backed by Supabase Auth/PostgreSQL. The
+Streamlit dashboard, notebooks, legacy scripts, and root-level ML artifacts
+remain available for compatibility and local experimentation; they are not
+required by the React deployment.
+
+For controlled deployment, use
+[docs/FINAL_DEPLOYMENT_RUNBOOK.md](docs/FINAL_DEPLOYMENT_RUNBOOK.md). For
+repository maintenance decisions, see
+[docs/REPOSITORY_CLEANUP_REPORT.md](docs/REPOSITORY_CLEANUP_REPORT.md).
 
 A comprehensive full-stack machine learning system for **real-time stock price prediction**, **technical analysis**, and **risk management** with an interactive Streamlit dashboard.
 
@@ -36,7 +49,7 @@ This system combines **data engineering**, **machine learning**, and **financial
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.9+
+- Python 3.12+
 - pip package manager
 - Git
 
@@ -75,6 +88,66 @@ streamlit run dashboard/app.py
 ```
 Dashboard opens at: **http://localhost:8501**
 
+### API and React application
+
+The upgrade adds a typed FastAPI boundary while retaining the Streamlit
+dashboard:
+
+```powershell
+# From the repository root
+$env:PYTHONPATH = "."
+uvicorn api.main:app --reload --port 8000
+
+# In a second terminal
+npm install --prefix frontend
+npm run dev --prefix frontend
+```
+
+The API is documented at `http://localhost:8000/docs` and the React app runs at
+`http://localhost:5173`. Yahoo Finance data is provider-delayed and responses
+identify whether data came from the local cache or Yahoo Finance. Forecast
+endpoints require a compatible trained model artifact; they never fabricate a
+prediction when one is unavailable.
+
+For the local API and legacy dashboard together:
+
+```powershell
+docker compose -f deployment/docker-compose.yml up --build
+```
+
+Supabase tables and row-level security policies are provided in
+`supabase/migrations/001_initial_schema.sql`. Authentication and persistence
+remain opt-in until Supabase environment variables are configured.
+
+### Supabase authentication setup
+
+1. Create a free Supabase project and enable email/password authentication.
+2. Apply both SQL migrations in `supabase/migrations/` using the Supabase SQL
+   editor or CLI.
+3. Copy `.env.example` to `.env` for the backend and to
+   `frontend/.env.local` for Vite. Put the service-role key only in the
+   backend `.env`; expose only the anon key to the frontend.
+4. Start the API and frontend using the commands above.
+
+The backend validates Supabase JWT signatures using the project's JWKS
+endpoint. `SUPABASE_JWT_SECRET` is supported only for projects configured with
+legacy HS256 tokens. Private API routes reject missing, invalid, and expired
+tokens and always apply the authenticated subject to database filters.
+
+### Registered model training
+
+Train a CPU-compatible registered model outside request handling:
+
+```powershell
+$env:PYTHONPATH = "."
+python scripts/train_registered_models.py --symbol AAPL --model random_forest
+```
+
+The command writes a versioned artifact and JSON metadata under
+`models_saved/`. Optional XGBoost and LightGBM models are listed as unavailable
+unless their packages are installed. Evaluation uses the chronological
+holdout, never a shuffled split.
+
 **Step 3: (Optional) Start Real-Time Data Ingestion**
 ```bash
 # In a new terminal, start live data streaming
@@ -87,15 +160,15 @@ python scripts/realtime_runner.py
 
 | Component | Technology |
 |-----------|-----------|
-| **Frontend** | Streamlit (Python web framework) |
+| **Frontend** | React, TypeScript, Vite |
+| **API** | FastAPI, Uvicorn |
 | **Data Processing** | Pandas, NumPy |
-| **Machine Learning** | scikit-learn (Random Forest) |
-| **Deep Learning** | PyTorch (CNN-LSTM) |
-| **Data Source** | Yahoo Finance (yfinance API) |
-| **Data Storage** | CSV files |
-| **Model Serialization** | joblib, PyTorch `.pt` format |
-| **Deployment** | Docker & Docker Compose |
-| **Logging** | Python logging module |
+| **Machine Learning** | scikit-learn; optional CPU PyTorch/XGBoost/LightGBM |
+| **Data Source** | Yahoo Finance and RSS providers |
+| **Data Storage** | Supabase PostgreSQL with RLS; CSV/model artifacts for legacy ML |
+| **Authentication** | Supabase Auth and JWT/JWKS validation |
+| **Deployment** | Docker Compose, Cloudflare Pages/Render candidates |
+| **Testing** | pytest, Vitest, React Testing Library, Playwright |
 
 ---
 

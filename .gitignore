@@ -1,41 +1,4 @@
-<<<<<<< HEAD:.gitignore
 # Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.env
-venv/
-.env/
-
-# Data
-data/raw/realtime/*.csv
-data/processed/*.csv
-
-# Models
-models_saved/*.pkl
-models_saved/*.h5
-
-# Logs
-logs/*.log
-
-# Jupyter
-.ipynb_checkpoints/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# Docker
-*.log
-=======
-# ==========================
-# Python
-# ==========================
 __pycache__/
 *.py[cod]
 *.pyo
@@ -43,89 +6,53 @@ __pycache__/
 *.so
 *.dll
 
-# ==========================
-# Virtual Environments
-# ==========================
+# Virtual environments and secrets
 .venv/
 venv/
 env/
 ENV/
-stock/
-
-# ==========================
-# Environment Variables
-# ==========================
 .env
 .env.*
 
-# ==========================
-# IDEs
-# ==========================
+# IDE and notebooks
 .vscode/
 .idea/
-
-# ==========================
-# Jupyter
-# ==========================
 .ipynb_checkpoints/
 
-# ==========================
-# Logs
-# ==========================
+# Logs and build output
 logs/
 *.log
-
-# ==========================
-# Python Build
-# ==========================
 build/
 dist/
 *.egg-info/
 .eggs/
 pip-wheel-metadata/
 
-# ==========================
-# Test & Coverage
-# ==========================
+# Test and type-checking output
 .pytest_cache/
 .coverage
 htmlcov/
-
-# ==========================
-# Type Checking
-# ==========================
 .mypy_cache/
+.ruff_cache/
+*.coverage
 
-# ==========================
-# Operating System
-# ==========================
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/tsconfig.tsbuildinfo
+frontend/test-results/
+frontend/playwright-report/
+.vite-temp/
+
+# OS
 .DS_Store
 Thumbs.db
 
-# ==========================
 # Streamlit
-# ==========================
 .streamlit/secrets.toml
 
-# ==========================
-# Temporary Files
-# ==========================
-*.tmp
-*.temp
-
-# ==========================
-# Optional Large Model Files
-# (Only uncomment if they exceed GitHub's limits)
-# ==========================
-# *.h5
-# *.pt
-# *.pth
-# *.onnx
-
-# ==========================
-# Optional Large Datasets
-# (Only uncomment if datasets become too large)
-# ==========================
-# data/raw/
-# data/processed/
->>>>>>> 9f58e0a (Improve live market dashboard and remove tracked virtual environment):Real-Time-Stock-Market-Analysis-And-Prediction-System/.gitignore
+# Project-generated data and models
+data/raw/realtime/*.csv
+data/processed/*.csv
+models_saved/*.pkl
+models_saved/*.h5

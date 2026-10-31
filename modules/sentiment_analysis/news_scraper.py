@@ -5,7 +5,7 @@ from modules.utils.config_loader import load_config
 logger = get_logger(__name__)
 CONFIG = load_config()
 
-NEWS_API_KEY = CONFIG.get("e74ccdb303b841dabc7cfc3fb969c23c", "")
+NEWS_API_KEY = CONFIG.get("news_api_key", "")
 NEWS_API_URL = "https://newsapi.org/v2/everything"
 
 def fetch_financial_news(query: str, page_size: int = 10):
