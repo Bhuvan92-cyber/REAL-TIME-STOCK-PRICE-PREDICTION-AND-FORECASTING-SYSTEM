@@ -70,6 +70,11 @@ requirements audit passes.
 The next CI run also needs the pinned `httpx` test dependency for Starlette's
 `TestClient`; the first Python 3.12 test execution exposed its absence.
 
+The following CI run exposed the intentional optional-ML split: the
+deterministic legacy model tests import PyTorch. CI now installs the pinned CPU
+PyTorch wheel only for backend tests; the production API image remains free of
+the optional deep-learning stack.
+
 Live Supabase isolation, external market-data validation, and public URL smoke
 tests remain unverified.
 
