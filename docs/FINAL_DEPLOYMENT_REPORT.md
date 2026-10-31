@@ -28,9 +28,17 @@ Workflows are present under `.github/workflows/`:
 - `dependency-audit.yml`: scheduled Python and frontend dependency audits.
 - `evaluate-alerts.yml`: scheduled alert evaluation using GitHub secrets.
 
-Actual GitHub Actions execution for the current worktree was **not verified**
-because no push or workflow dispatch was authorized. Local results are not
-represented as CI results.
+The successful CI run verified:
+
+- Python 3.12 installation and dependency installation.
+- `pip check` and `pip-audit`.
+- Backend compilation, deterministic tests, and migration ordering.
+- Frontend `npm audit`, component tests, TypeScript/Vite build, and Playwright.
+- API, frontend, and Streamlit Docker image builds.
+
+Actual GitHub Actions execution is now verified for commit `df9a3ec` in run
+[41214754305](https://github.com/Bhuvan92-cyber/REAL-TIME-STOCK-PRICE-PREDICTION-AND-FORECASTING-SYSTEM/actions/runs/41214754305).
+The run completed successfully.
 
 ## Hosting and Supabase
 
@@ -56,24 +64,26 @@ represented as CI results.
 - Migration ordering: passed.
 - Docker Compose configuration: passed.
 
-The first actual GitHub Actions run for commit `bcafcde` completed with:
+Historical remediation runs:
+
+- Commit `bcafcde`: backend audit failed on Streamlit's transitive Pillow
+  dependency.
+- Commit `a69fd8e`: production audit was fixed, but backend tests exposed the
+  missing `httpx` test dependency.
+- Commit `286b7e9`: `httpx` was present, but tests exposed the intentionally
+  optional PyTorch runtime was not installed in CI.
+
+The final run for commit `df9a3ec` completed successfully:
 
 - `frontend`: passed.
 - `docker`: passed.
-- `backend`: failed only at `pip-audit` because Streamlit's transitive Pillow
-  `12.3.0` produced 39 advisories. Python installation and `pip check` passed.
+- `backend`: passed, including Python 3.12 `pip check`, `pip-audit`, and tests.
 
-The legacy Streamlit dependency set is now separated into
-`requirements-streamlit.txt`; the next CI run must verify the production
-requirements audit passes.
-
-The next CI run also needs the pinned `httpx` test dependency for Starlette's
-`TestClient`; the first Python 3.12 test execution exposed its absence.
-
-The following CI run exposed the intentional optional-ML split: the
-deterministic legacy model tests import PyTorch. CI now installs the pinned CPU
-PyTorch wheel only for backend tests; the production API image remains free of
-the optional deep-learning stack.
+The legacy Streamlit dependency set remains isolated in
+`requirements-streamlit.txt`; the production API image remains free of its
+Pillow constraint. CI installs the pinned CPU PyTorch wheel only for backend
+tests; the production API image remains free of the optional deep-learning
+stack.
 
 Live Supabase isolation, external market-data validation, and public URL smoke
 tests remain unverified.
