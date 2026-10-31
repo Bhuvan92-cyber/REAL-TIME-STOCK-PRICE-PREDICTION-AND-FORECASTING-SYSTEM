@@ -27,13 +27,15 @@ below by identifier.
   without violating the supported runtime constraint. The target Python 3.12
   requirements now select those fixed versions; the remaining risk must be
   re-audited on Python 3.12.
-- Streamlit `1.54.0` currently constrains Pillow to `<13`; Pillow `13.0.0`
-  cannot be forced without breaking dependency resolution. The Pillow
-  advisories remain a documented transitive risk until Streamlit lifts that
-  constraint or the legacy Streamlit surface is removed.
+- The legacy Streamlit surface is now isolated in
+  `requirements-streamlit.txt` and the optional `streamlit` setup extra.
+  Production API requirements no longer install Streamlit or its vulnerable
+  Pillow constraint. The legacy dashboard remains available, but its
+  transitive Pillow audit must be treated separately until Streamlit supports
+  Pillow 13.
 - A Python 3.12-targeted pip resolution completed successfully with the
-  selected requirements. It selected Tornado `6.6`, Starlette `1.3.1`, and
-  Pillow `12.3.0`; this is a compatibility check, not a replacement for
+  selected requirements. It selected Tornado `6.6` and Starlette `1.3.1`;
+  this is a compatibility check, not a replacement for
   running `pip-audit` under an actual Python 3.12 interpreter.
 - Optional deep-learning dependencies were removed from the base install and
   placed in the pinned `ml_cpu` extra to reduce the default attack surface and

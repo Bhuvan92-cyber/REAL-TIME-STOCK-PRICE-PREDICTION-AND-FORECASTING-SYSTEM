@@ -1,0 +1,7 @@
+-r requirements.txt
+
+# Optional legacy dashboard dependencies. Keep separate from the API runtime
+# so backend security audits do not inherit Streamlit's Pillow constraint.
+streamlit==1.54.0
+streamlit-autorefresh==1.0.1
+altair==6.0.0

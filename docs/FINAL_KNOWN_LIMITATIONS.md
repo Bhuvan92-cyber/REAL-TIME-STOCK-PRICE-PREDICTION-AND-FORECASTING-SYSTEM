@@ -2,8 +2,9 @@
 
 - Yahoo Finance is delayed/external and can fail or rate-limit; live tests are
   excluded from the deterministic suite.
-- Streamlit's Pillow constraint may leave transitive Pillow advisories; the
-  final Python 3.12 `pip-audit` result must be confirmed in CI before release.
+- The optional legacy Streamlit dependency set may retain transitive Pillow
+  advisories until Streamlit supports Pillow 13; it is excluded from the
+  production API dependency audit.
 - Free hosting card requirements are unverified and provider sleep/quotas
   apply.
 - No payment provider, brokerage, real-money trading, or paid market-data

@@ -65,6 +65,9 @@ This system combines **data engineering**, **machine learning**, and **financial
    pip install -e .
    ```
    This installs all dependencies and registers the `modules` package.
+   The maintained API runtime does not install the optional legacy Streamlit
+   dashboard; install `pip install -e ".[streamlit]"` when that dashboard is
+   needed.
 
 3. **Verify installation:**
    ```bash

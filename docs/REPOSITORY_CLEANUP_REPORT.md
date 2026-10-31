@@ -76,7 +76,9 @@ authorized review:
 
 ## Dependency and documentation decisions
 
-No runtime dependency was removed. The frontend lockfile remains required.
+Streamlit was separated from the production API dependency set into
+`requirements-streamlit.txt` and an optional `streamlit` setup extra. No
+required API dependency was removed. The frontend lockfile remains required.
 Generated output is now ignored through `.gitignore` entries for Ruff cache,
 coverage files, Playwright output, test results, and Vite temporary files.
 

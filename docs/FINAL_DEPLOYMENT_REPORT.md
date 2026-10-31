@@ -56,9 +56,19 @@ represented as CI results.
 - Migration ordering: passed.
 - Docker Compose configuration: passed.
 
-Python 3.12 runtime, Python dependency audit under 3.12, Docker image
-build/runtime, live Supabase isolation, external market-data validation, and
-public URL smoke tests remain unverified.
+The first actual GitHub Actions run for commit `bcafcde` completed with:
+
+- `frontend`: passed.
+- `docker`: passed.
+- `backend`: failed only at `pip-audit` because Streamlit's transitive Pillow
+  `12.3.0` produced 39 advisories. Python installation and `pip check` passed.
+
+The legacy Streamlit dependency set is now separated into
+`requirements-streamlit.txt`; the next CI run must verify the production
+requirements audit passes.
+
+Live Supabase isolation, external market-data validation, and public URL smoke
+tests remain unverified.
 
 ## Required authorization boundary
 

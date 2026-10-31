@@ -11,9 +11,6 @@ setup(
         "pandas==2.3.3",
         "scikit-learn==1.7.2",
         "joblib==1.5.3",
-        "streamlit==1.54.0",
-        "streamlit-autorefresh==1.0.1",
-        "altair==6.0.0",
         "yfinance==0.2.43",
         "PyYAML==6.0.1",
         "python-dateutil==2.9.0.post0",
@@ -43,6 +40,11 @@ setup(
             "torchvision==0.21.0",
             "torchaudio==2.6.0",
             "transformers==4.48.3",
+        ],
+        "streamlit": [
+            "streamlit==1.54.0",
+            "streamlit-autorefresh==1.0.1",
+            "altair==6.0.0",
         ],
         "dev": [
             "pytest==7.4.4",
